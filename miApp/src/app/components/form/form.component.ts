@@ -1,46 +1,68 @@
-import { Component, OnInit } from '@angular/core';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from "@angular/forms"
-import { UsersService } from '../../services/users.service';
+import { Component, signal } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { DatePipe } from '@angular/common';
+
+
+export interface Mensaje {
+  texto: string;
+  fecha: Date;
+}
+
+export interface Usuario {
+  id: number;
+  avatar: string;
+  nombre: string;
+  estado: 'online' | 'offline' | 'última vez visto';
+  mensajes: Mensaje[]; // Aquí guardamos los chats del usuario
+}
+
+
 
 @Component({
   selector: 'app-form',
   standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './form.component.html',
-  styleUrl: './form.component.css',
+  imports: [ReactiveFormsModule,DatePipe], // ¡Importante para que funcione el form!
+  templateUrl: './form.component.html'
 })
+export class FormComponent {
+  usuarioForm: FormGroup;
+  
+  // Usamos una Signal para guardar la lista de usuarios (Reactivo y moderno)
+  usuarios = signal<Usuario[]>([]);
 
-export class FormComponent implements OnInit {
-  form: FormGroup
-  usuarios: any[] = []
-
-  constructor(private fb: FormBuilder, private userService: UsersService) {
-    this.form = this.fb.group({
-      username: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+  constructor(private fb: FormBuilder) {
+    // Definimos el formulario con validaciones básicas
+    this.usuarioForm = this.fb.group({
+      nombre: ['', Validators.required],
+      avatar: ['', Validators.required],
+      estado: ['online']
     });
   }
 
-  ngOnInit() {
-    this.userService.getUsers().subscribe({
-      next: (data) => {
-        console.log(data)
-        this.usuarios = data
-      },
-      error: () => console.log("Error al traer los usuarios")
-    })
+  agregarUsuario() {
+    if (this.usuarioForm.valid) {
+      const nuevoUsuario: Usuario = {
+        id: Date.now(), // ID único temporal
+        ...this.usuarioForm.value,
+        mensajes: [] // Arranca sin mensajes
+      };
+
+      // Actualizamos la lista de usuarios
+      this.usuarios.update(prev => [...prev, nuevoUsuario]);
+      this.usuarioForm.reset({ estado: 'online' }); // Limpiamos el form
+    }
   }
 
-  enviar() {
-    if (this.form.valid) {
-      // utilizar el servicio para realizar una petición http (addUser(user))
-      this.userService.addUser(this.form.value).subscribe({
-        next: () => {
-          this.usuarios.push(this.form.value)
-          this.form.reset()
+  enviarMensaje(usuarioId: number, texto: string) {
+    if (!texto) return;
+
+    this.usuarios.update(listado => 
+      listado.map(u => {
+        if (u.id === usuarioId) {
+          return { ...u, mensajes: [...u.mensajes, { texto, fecha: new Date() }] };
         }
+        return u;
       })
-    }
+    );
   }
 }
