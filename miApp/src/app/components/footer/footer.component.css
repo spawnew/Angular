@@ -1,5 +1,7 @@
-.form{
-    display:flex;
-    flex-direction: column;
-    gap: 10px;
+.footer{
+    background-color: #0a0909;
+    color: #ddd;
+    text-align: center;
+    padding: 1rem;
+    
 }

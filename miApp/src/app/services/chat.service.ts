@@ -1,47 +1,95 @@
-import { Injectable, signal, computed } from '@angular/core';
-import { Usuario, Mensaje } from '../models/model';
+import { Injectable, signal } from '@angular/core';
+import { Usuario } from '../models/model';
 
 @Injectable({ providedIn: 'root' })
 export class ChatService {
-  // Señal principal privada con todos los chats
-  private _chats = signal<Usuario[]>([]);
 
-  // Exponemos la lista como solo lectura para los componentes
+  // 🔹 Señales
+  private _chats = signal<Usuario[]>([]);
   chats = this._chats.asReadonly();
 
-  // Señal opcional para guardar cuál es el ID seleccionado (útil para el responsive)
   private _idSeleccionado = signal<string | null>(null);
   idSeleccionado = this._idSeleccionado.asReadonly();
 
-  // Función para agregar un nuevo chat desde el formulario
+  // 🔹 Constructor → carga desde localStorage
+  constructor() {
+    this.cargarDesdeStorage();
+  }
+
+  // 🔹 Cargar datos
+  private cargarDesdeStorage() {
+
+    // Cargar chats
+    const data = localStorage.getItem('chats');
+    if (data) {
+      this._chats.set(JSON.parse(data));
+    }
+
+    // Cargar chat seleccionado
+    const seleccionado = localStorage.getItem('chatSeleccionado');
+    if (seleccionado) {
+      const id = JSON.parse(seleccionado);
+
+      // validar que exista
+      const existe = this._chats().some(c => c.id === id);
+
+      if (existe) {
+        this._idSeleccionado.set(id);
+      }
+    }
+  }
+
+  // 🔹 Guardar chats
+  private guardarChats() {
+    localStorage.setItem('chats', JSON.stringify(this._chats()));
+  }
+
+  // 🔹 Guardar selección
+  private guardarSeleccion() {
+    localStorage.setItem('chatSeleccionado', JSON.stringify(this._idSeleccionado()));
+  }
+
+  // 🔹 Agregar chat
   agregarChat(nuevoChat: Usuario) {
     this._chats.update(lista => [...lista, nuevoChat]);
+    this.guardarChats();
   }
 
-  // Función para seleccionar un chat (para el responsive y lógica)
+  // 🔹 Seleccionar chat
   seleccionarChat(id: string | null) {
     this._idSeleccionado.set(id);
+    this.guardarSeleccion();
   }
 
-  // Lógica para enviar mensaje y auto-respuesta
+  // 🔹 Enviar mensaje
   enviarMensaje(chatId: string, texto: string, emisor: 'usuario' | 'app') {
+
     this._chats.update(lista =>
       lista.map(c => {
         if (c.id === chatId) {
           return {
             ...c,
-            mensajes: [...c.mensajes, { texto, emisor, fecha: new Date() }]
+            mensajes: [
+              ...c.mensajes,
+              { texto, emisor, fecha: new Date() }
+            ]
           };
         }
         return c;
       })
     );
 
-    // Auto-respuesta de la App si el mensaje fue del usuario
+    this.guardarChats();
+
+    // 🔹 Auto-respuesta
     if (emisor === 'usuario') {
       setTimeout(() => {
-        this.enviarMensaje(chatId, `¡Hola! Soy la App. Recibí tu mensaje: "${texto}"`, 'app');
-      }, 1500); // 1.5 segundos de retraso
+        this.enviarMensaje(
+          chatId,
+          `¡Hola! Soy la App. Recibí tu mensaje: "${texto}"`,
+          'app'
+        );
+      }, 1500);
     }
   }
 }
