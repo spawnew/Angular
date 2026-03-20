@@ -1,25 +1,25 @@
-/* src/app/pages/layout-chat/layout-chat.component.css */
+
 
 .contenedor-principal {
     display: grid;
     height: 100vh;
     grid-template-columns: 1fr;
-    /* Móvil: una sola columna completa */
+    
 }
 
 @media (min-width: 768px) {
     .contenedor-principal {
         grid-template-columns: 350px 1fr;
-        /* Desktop: Sidebar fija y panel principal flexible */
+       
     }
 }
 
-/* Sidebar (Panel Izquierdo) */
 .sidebar {
     border-right: 1px solid #ddd;
-    background: #fff;
+    background: #1b1a1a;
     display: flex;
     flex-direction: column;
+    color:#ddd;
 }
 
 .sidebar-header {
@@ -27,7 +27,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #ddd;
+   
 }
 
 .contacto-card {
@@ -35,15 +35,16 @@
     padding: 1rem;
     text-decoration: none;
     color: #333;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #0f0e0e;
+    color:#ddd
 }
 
 .contacto-card:hover {
-    background-color: #f1f1f1;
+    background-color: #151616;
 }
 
 .contacto-card.activa {
-    background-color: #e3f2fd;
+    background-color: #353a3d;
 }
 
 .avatar-small {
@@ -72,11 +73,12 @@
     font-size: 0.8rem;
 }
 
-/* Ventana Principal (Panel Derecho) */
+
 .ventana-principal {
-    background: #f4f7f6;
+    background: #29292b;
     display: flex;
     flex-direction: column;
+    color:#ddd
 }
 
 .btn-volver {
@@ -84,30 +86,27 @@
     margin: 10px;
 }
 
-/* Oculto en desktop */
-
-/* Lógica Responsive Móvil: Ocultar/Mostrar un panel a la vez */
 @media (max-width: 767px) {
     .sidebar.oculta {
         display: none !important;
     }
 
-    /* Oculta sidebar si hay chat seleccionado */
+  
 
     .ventana-principal {
         display: none !important;
     }
 
-    /* Oculta ventana chat si NO hay seleccionado */
+
     .ventana-principal.visible {
         display: flex !important;
     }
 
-    /* Muestra ventana chat si hay seleccionado */
+   
 
     .btn-volver {
         display: block;
     }
 
-    /* Muestra botón volver en móvil */
+   
 }

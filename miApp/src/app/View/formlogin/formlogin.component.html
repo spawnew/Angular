@@ -1,0 +1,23 @@
+<div class="login-container">
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="login-card">
+        <h2>Login de Sistemas</h2>
+
+        @if (errorDeLogin) {
+        <p style="color: red; font-weight: bold; text-align: center;">
+            Credenciales incorrectas. Intentá de nuevo.
+        </p>
+        }
+
+        <div class="input-group">
+            <label>Usuario</label>
+            <input type="text" formControlName="email" placeholder="admin">
+        </div>
+
+        <div class="input-group">
+            <label>Contraseña</label>
+            <input type="password" formControlName="password" placeholder="123456">
+        </div>
+
+        <button type="submit" [disabled]="loginForm.invalid">Ingresar</button>
+    </form>
+</div>

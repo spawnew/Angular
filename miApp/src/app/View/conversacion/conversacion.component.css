@@ -5,15 +5,18 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    color: gray;
+    color: rgb(238, 229, 229);
 }
 
 .chat-header {
     padding: 1rem;
-    background: #fff;
+    background: #070808;
     border-bottom: 1px solid #ddd;
     display: flex;
     align-items: center;
+    border: 1px solid #0f0e0e;
+    border-radius:10px;
+    color:#ddd
 }
 
 .avatar-header {
@@ -21,6 +24,7 @@
     height: 50px;
     border-radius: 50%;
     margin-right: 1rem;
+    border:1px solid #19dd43;
 }
 
 .info-header h3 {
@@ -32,10 +36,10 @@
     color: gray;
 }
 
-/* Historial de mensajes con Flexbox */
+
 .historial {
     flex: 1;
-    /* Ocupa el resto de la pantalla */
+    
     overflow-y: auto;
     padding: 2rem;
     display: flex;
@@ -52,29 +56,29 @@
     justify-content: flex-end;
 }
 
-/* Alinea mensajes de usuario a la derecha */
 
-/* Burbujas diferenciadas */
 .burbuja {
     max-width: 70%;
     padding: 10px 15px;
     border-radius: 10px;
     position: relative;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+   
 }
 
 .burbuja.usuario {
-    background-color: #dcf8c6;
+    background-color: #515851;
     border-top-right-radius: 0;
+    color:rgb(225, 233, 225);
 }
 
-/* Usuario: verde y sin punta superior derecha */
+
 .burbuja.app {
-    background-color: #fff;
+    background-color: #515851;
     border-top-left-radius: 0;
 }
 
-/* App: blanco y sin punta superior izquierda */
+
 
 .burbuja p {
     margin: 0;
@@ -88,11 +92,11 @@
     margin-top: 5px;
 }
 
-/* Footer con Formulario Reactivo */
+
 .chat-footer {
     padding: 1rem;
-    background: #fff;
-    border-top: 1px solid #ddd;
+    background: #0a0909;
+    
 }
 
 .form-envio {
@@ -103,13 +107,15 @@
 .form-envio input {
     flex: 1;
     padding: 10px;
-    border: 1px solid #ddd;
+
     border-radius: 20px;
+    background-color:#302a2a;
+    color:#ddd;
 }
 
 .form-envio button {
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #00ff22;
     color: white;
     border: none;
     border-radius: 20px;
