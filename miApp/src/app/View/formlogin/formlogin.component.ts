@@ -1,15 +1,19 @@
-import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, inject } from '@angular/core'; // 1. Agregamos Component
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'; // 2. Agregamos ReactiveFormsModule
 import { Router } from '@angular/router';
 
-
+@Component({
+  selector: 'app-login',
+  standalone: true, // Esto es clave en Angular moderno
+  imports: [ReactiveFormsModule], // 3. IMPORTANTE: Sin esto, [formGroup] en el HTML falla
+  templateUrl: './formlogin.component.html',
+  styleUrls: ['./formlogin.component.css']
+})
 export class LoginComponent {
   private fb = inject(FormBuilder);
   private router = inject(Router);
-  
- 
-  errorDeLogin: boolean = false;
 
+  errorDeLogin: boolean = false;
   loginForm: FormGroup;
 
   constructor() {
@@ -22,13 +26,11 @@ export class LoginComponent {
   onLogin() {
     const { email, password } = this.loginForm.value;
 
-   
     if (email === 'admin@gmail.com' && password === '123456') {
       this.errorDeLogin = false;
       console.log('¡Acceso concedido!');
       this.router.navigate(['/chats']); 
     } else {
-    
       this.errorDeLogin = true;
       console.log('Usuario o clave incorrectos');
     }
