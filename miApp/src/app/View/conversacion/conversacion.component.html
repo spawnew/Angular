@@ -1,0 +1,35 @@
+@if (chatActivo()) {
+
+<header class="chat-header">
+    <img [src]="chatActivo()?.avatar" alt="Avatar" class="avatar-header">
+    <div class="info-header">
+        <h3>{{ chatActivo()?.nombre }}</h3>
+        <span class="estado">{{ chatActivo()?.estado }}</span>
+    </div>
+</header>
+
+<div class="historial">
+    @for (msg of chatActivo()?.mensajes; track msg.fecha) {
+
+    <div class="mensaje-container" [class.derecha]="msg.emisor === 'usuario'">
+        <div class="burbuja" [class.usuario]="msg.emisor === 'usuario'" [class.app]="msg.emisor === 'app'">
+            <p>{{ msg.texto }}</p>
+            <small class="hora">{{ msg.fecha | date:'shortTime' }}</small>
+        </div>
+    </div>
+
+    } @empty {
+    <div class="chat-vacio">No hay mensajes. Escribe para empezar.</div>
+    }
+</div>
+
+<footer class="chat-footer">
+    <form [formGroup]="formMensaje" (ngSubmit)="mandar()" class="form-envio">
+        <input type="text" formControlName="texto" placeholder="Escribe un mensaje aquí...">
+        <button type="submit" [disabled]="formMensaje.invalid">✈️</button>
+    </form>
+</footer>
+
+} @else {
+<div class="chat-vacio">Selecciona un chat para ver la conversación.</div>
+}

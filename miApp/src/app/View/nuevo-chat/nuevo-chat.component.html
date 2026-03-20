@@ -1,0 +1,26 @@
+<div class="container-nuevo">
+    <h2>Crear Nuevo Chat</h2>
+
+    <form [formGroup]="formNuevoChat" (ngSubmit)="crear()" class="form-nuevo">
+        <div class="input-group">
+            <label>Nombre del Contacto:</label>
+            <input type="text" formControlName="nombre" placeholder="Ej: Vincent Porter">
+        </div>
+
+        <div class="input-group">
+            <label>URL del Avatar (Imagen):</label>
+            <input type="text" formControlName="avatar" placeholder="Ej: https://i.pravatar.cc/150">
+        </div>
+
+        <div class="input-group">
+            <label>Estado Inicial:</label>
+            <select formControlName="estado">
+                <option value="online">Online</option>
+                <option value="offline">Offline</option>
+                <option value="left 7 mins ago">Last seen (left 7 mins ago)</option>
+            </select>
+        </div>
+
+        <button type="submit" [disabled]="formNuevoChat.invalid">Crear Chat</button>
+    </form>
+</div>

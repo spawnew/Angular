@@ -1,1 +1,41 @@
-<p>main works!</p>
+<div class="contenedor-principal">
+
+    <aside class="sidebar" [class.oculta]="idSeleccionado() !== null">
+
+        <header class="sidebar-header">
+            <h2>Mis Chats</h2>
+            <button routerLink="nuevo">➕ Nuevo Chat</button>
+        </header>
+
+        <div class="lista-contactos">
+            @for (chat of chats(); track chat.id) {
+            <a [routerLink]="[chat.id]" routerLinkActive="activa" class="contacto-card"
+                (click)="chatService.seleccionarChat(chat.id)">
+
+                <img [src]="chat.avatar" alt="Avatar" class="avatar-small">
+
+                <div class="contacto-info">
+                    <span class="nombre">{{ chat.nombre }}</span>
+
+                    @if (chat.estado === 'online') {
+                    <span class="estado online">Online</span>
+                    } @else {
+                    <span class="estado offline">{{ chat.estado }}</span>
+                    }
+                </div>
+            </a>
+            } @empty {
+            <p class="text-center">No hay chats creados aún.</p>
+            }
+        </div>
+    </aside>
+
+    <main class="ventana-principal" [class.visible]="idSeleccionado() !== null">
+        @if (idSeleccionado()) {
+        <button class="btn-volver" (click)="deseleccionarChat()">🔙 Volver a Chats</button>
+        }
+
+        <router-outlet></router-outlet>
+    </main>
+
+</div>
