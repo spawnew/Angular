@@ -1,10 +1,10 @@
 <div class="contenedor-principal">
 
-    <aside class="sidebar" [class.oculta]="idSeleccionado() !== null">
+    <aside class="sidebar" [class.oculta]="mostrarContenido()">
 
         <header class="sidebar-header">
             <h2>Mis Chats</h2>
-            <button routerLink="nuevo">➕ Nuevo Chat</button>
+            <button routerLink="nuevo" class="btn-nuevo">➕ Nuevo Chat</button>
         </header>
 
         <div class="lista-contactos">
@@ -16,7 +16,6 @@
 
                 <div class="contacto-info">
                     <span class="nombre">{{ chat.nombre }}</span>
-
                     @if (chat.estado === 'online') {
                     <span class="estado online">Online</span>
                     } @else {
@@ -25,7 +24,7 @@
                 </div>
             </a>
             } @empty {
-            <p class="text-center">No hay chats creados aún.</p>
+            <p class="text-empty">No hay chats creados aún.</p>
             }
         </div>
     </aside>

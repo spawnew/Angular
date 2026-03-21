@@ -1,5 +1,4 @@
 
-;
 import { CommonModule } from '@angular/common'; 
 import { ChatService } from '../../services/chat.service';
 import { Component, inject, computed } from '@angular/core'; // Agregá computed
