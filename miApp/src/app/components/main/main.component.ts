@@ -2,11 +2,12 @@
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common'; 
 import { ChatService } from '../../services/chat.service';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, CommonModule],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, CommonModule,FooterComponent],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })
