@@ -91,22 +91,23 @@
         display: none !important;
     }
 
-  
-
     .ventana-principal {
         display: none !important;
+        width: 100%;
+        /* Asegura que ocupe todo el ancho */
+        height: 100vh;
     }
-
 
     .ventana-principal.visible {
         display: flex !important;
     }
 
-   
-
     .btn-volver {
         display: block;
+        padding: 10px;
+        background: #333;
+        color: white;
+        border: none;
+        cursor: pointer;
     }
-
-   
 }

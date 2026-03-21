@@ -30,11 +30,10 @@
         </div>
     </aside>
 
-    <main class="ventana-principal" [class.visible]="idSeleccionado() !== null">
-        @if (idSeleccionado()) {
+    <main class="ventana-principal" [class.visible]="mostrarContenido()">
+        @if (mostrarContenido()) {
         <button class="btn-volver" (click)="deseleccionarChat()">🔙 Volver a Chats</button>
         }
-
         <router-outlet></router-outlet>
     </main>
 
