@@ -1,15 +1,15 @@
-/* Contenedor principal del chat */
+
 .chat-window {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    /* O el alto que desees */
+   
     background-color: #121212;
     color: #fff;
     font-family: sans-serif;
 }
 
-/* Header: Avatar izquierda, Nombre derecha */
+
 .header {
     display: flex;
     align-items: center;
@@ -25,7 +25,7 @@
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid #2e7d32;
-    /* Borde verde de 'online' */
+  
 }
 
 .header h3 {
@@ -33,7 +33,7 @@
     font-size: 1.1rem;
 }
 
-/* Contenedor de mensajes: El motor del diseño */
+
 .messages-container {
     flex: 1;
     overflow-y: auto;
@@ -44,11 +44,10 @@
     gap: 12px;
     background-image: linear-gradient(rgba(18, 18, 18, 0.9), rgba(18, 18, 18, 0.9)),
         url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
-    /* Opcional: patrón de fondo */
+    
 }
 
-/* Burbujas de mensajes */
-.msg-mio,
+
 .msg-otro {
     max-width: 75%;
     padding: 10px 15px;
@@ -58,29 +57,29 @@
     line-height: 1.4;
 }
 
-/* Mensaje del USUARIO -> A LA DERECHA */
+
 .msg-mio {
     align-self: flex-end;
-    /* Lo empuja a la derecha */
+   
     background-color: #424242;
-    /* Gris medio */
+  
     color: #fff;
     border-bottom-right-radius: 2px;
-    /* Efecto pico de burbuja */
+    
 }
 
-/* Mensaje del OTRO/APP -> A LA IZQUIERDA */
+
 .msg-otro {
     align-self: flex-start;
-    /* Lo mantiene a la izquierda */
+   
     background-color: #212121;
-    /* Gris oscuro */
+  
     color: #ccc;
     border: 1px solid #333;
     border-bottom-left-radius: 2px;
 }
 
-/* Hora debajo del mensaje */
+
 .msg-mio span,
 .msg-otro span {
     display: block;
@@ -90,7 +89,7 @@
     text-align: right;
 }
 
-/* Área de Input */
+
 .input-area {
     display: flex;
     padding: 15px;
@@ -123,7 +122,7 @@
     opacity: 0.8;
 }
 
-/* Estado sin chat */
+
 .no-chat {
     display: flex;
     justify-content: center;
