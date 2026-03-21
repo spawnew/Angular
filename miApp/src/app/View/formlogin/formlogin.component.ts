@@ -1,15 +1,15 @@
 import { Component, inject } from '@angular/core'; // 1. Agregamos Component
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'; // 2. Agregamos ReactiveFormsModule
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'; 
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  standalone: true, // Esto es clave en Angular moderno
-  imports: [ReactiveFormsModule], // 3. IMPORTANTE: Sin esto, [formGroup] en el HTML falla
+  standalone: true,
+  imports: [ReactiveFormsModule], 
   templateUrl: './formlogin.component.html',
   styleUrls: ['./formlogin.component.css']
 })
-export class LoginComponent {
+export class FormloginComponent {
   private fb = inject(FormBuilder);
   private router = inject(Router);
 

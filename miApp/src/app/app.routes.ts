@@ -7,7 +7,7 @@ export const routes: Routes = [
   
   {
     path: 'login',
-    loadComponent: () => import('./View/formlogin/formlogin.component').then(m => m.LoginComponent)
+    loadComponent: () => import('./View/formlogin/formlogin.component').then(m => m.FormloginComponent)
   },
 
  

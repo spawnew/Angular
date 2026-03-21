@@ -1,128 +1,133 @@
+/* Contenedor principal del chat */
+.chat-window {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    /* O el alto que desees */
+    background-color: #121212;
+    color: #fff;
+    font-family: sans-serif;
+}
 
+/* Header: Avatar izquierda, Nombre derecha */
+.header {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #070404;
+    border-bottom: 1px solid #333;
+    gap: 15px;
+}
 
-.conversacion-vacia {
+.mini-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #2e7d32;
+    /* Borde verde de 'online' */
+}
+
+.header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+/* Contenedor de mensajes: El motor del diseño */
+.messages-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    /* Apila los mensajes uno abajo del otro */
+    gap: 12px;
+    background-image: linear-gradient(rgba(18, 18, 18, 0.9), rgba(18, 18, 18, 0.9)),
+        url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+    /* Opcional: patrón de fondo */
+}
+
+/* Burbujas de mensajes */
+.msg-mio,
+.msg-otro {
+    max-width: 75%;
+    padding: 10px 15px;
+    border-radius: 15px;
+    position: relative;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+/* Mensaje del USUARIO -> A LA DERECHA */
+.msg-mio {
+    align-self: flex-end;
+    /* Lo empuja a la derecha */
+    background-color: #424242;
+    /* Gris medio */
+    color: #fff;
+    border-bottom-right-radius: 2px;
+    /* Efecto pico de burbuja */
+}
+
+/* Mensaje del OTRO/APP -> A LA IZQUIERDA */
+.msg-otro {
+    align-self: flex-start;
+    /* Lo mantiene a la izquierda */
+    background-color: #212121;
+    /* Gris oscuro */
+    color: #ccc;
+    border: 1px solid #333;
+    border-bottom-left-radius: 2px;
+}
+
+/* Hora debajo del mensaje */
+.msg-mio span,
+.msg-otro span {
+    display: block;
+    font-size: 0.7rem;
+    margin-top: 5px;
+    opacity: 0.5;
+    text-align: right;
+}
+
+/* Área de Input */
+.input-area {
+    display: flex;
+    padding: 15px;
+    background-color: #000;
+    gap: 10px;
+}
+
+.input-area input {
+    flex: 1;
+    background-color: #2c2c2c;
+    border: 1px solid #444;
+    border-radius: 20px;
+    padding: 10px 18px;
+    color: #fff;
+    outline: none;
+}
+
+.input-area button {
+    background-color: #fff;
+    color: #000;
+    border: none;
+    padding: 0 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: opacity 0.2s;
+}
+
+.input-area button:hover {
+    opacity: 0.8;
+}
+
+/* Estado sin chat */
+.no-chat {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
-    color: rgb(238, 229, 229);
-}
-
-.chat-header {
-    padding: 1rem;
-    background: #070808;
-    border-bottom: 1px solid #ddd;
-    display: flex;
-    align-items: center;
-    border: 1px solid #0f0e0e;
-    border-radius:10px;
-    color:#ddd
-}
-
-.avatar-header {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-right: 1rem;
-    border:1px solid #19dd43;
-}
-
-.info-header h3 {
-    margin: 0;
-}
-
-.info-header .estado {
-    font-size: 0.8rem;
-    color: gray;
-}
-
-
-.historial {
-    flex: 1;
-    
-    overflow-y: auto;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.mensaje-container {
-    display: flex;
-    width: 100%;
-}
-
-.mensaje-container.derecha {
-    justify-content: flex-end;
-}
-
-
-.burbuja {
-    max-width: 70%;
-    padding: 10px 15px;
-    border-radius: 10px;
-    position: relative;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-   
-}
-
-.burbuja.usuario {
-    background-color: #515851;
-    border-top-right-radius: 0;
-    color:rgb(225, 233, 225);
-}
-
-
-.burbuja.app {
-    background-color: #515851;
-    border-top-left-radius: 0;
-}
-
-
-
-.burbuja p {
-    margin: 0;
-}
-
-.hora {
-    font-size: 0.7rem;
-    color: gray;
-    display: block;
-    text-align: right;
-    margin-top: 5px;
-}
-
-
-.chat-footer {
-    padding: 1rem;
-    background: #0a0909;
-    
-}
-
-.form-envio {
-    display: flex;
-    gap: 10px;
-}
-
-.form-envio input {
-    flex: 1;
-    padding: 10px;
-
-    border-radius: 20px;
-    background-color:#302a2a;
-    color:#ddd;
-}
-
-.form-envio button {
-    padding: 10px 20px;
-    background-color: #00ff22;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-}
-
-.form-envio button:disabled {
-    background-color: #ddd;
-    cursor: not-allowed;
+    color: #666;
 }

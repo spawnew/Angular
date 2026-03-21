@@ -1,35 +1,27 @@
-@if (chatActivo()) {
-
-<header class="chat-header">
-    <img [src]="chatActivo()?.avatar" alt="Avatar" class="avatar-header">
-    <div class="info-header">
-        <h3>{{ chatActivo()?.nombre }}</h3>
-        <span class="estado">{{ chatActivo()?.estado }}</span>
+<div class="chat-window">
+    @if (chatActual()) {
+    <div class="header">
+        <img [src]="chatActual()?.avatar" alt="Avatar" class="mini-avatar">
+        <h3>{{ chatActual()?.nombre }}</h3>
     </div>
-</header>
 
-<div class="historial">
-    @for (msg of chatActivo()?.mensajes; track msg.fecha) {
-
-    <div class="mensaje-container" [class.derecha]="msg.emisor === 'usuario'">
-        <div class="burbuja" [class.usuario]="msg.emisor === 'usuario'" [class.app]="msg.emisor === 'app'">
+    <div class="messages-container">
+        @for (msg of chatActual()?.mensajes; track msg.fecha) {
+        <div [class]="msg.emisor === 'usuario' ? 'msg-mio' : 'msg-otro'">
             <p>{{ msg.texto }}</p>
-            <small class="hora">{{ msg.fecha | date:'shortTime' }}</small>
+            <span>{{ msg.fecha | date:'HH:mm' }}</span>
         </div>
+        }
     </div>
 
-    } @empty {
-    <div class="chat-vacio">No hay mensajes. Escribe para empezar.</div>
+    <div class="input-area">
+        <input #msgInput type="text" placeholder="Escribí un mensaje..."
+            (keyup.enter)="enviar(msgInput.value); msgInput.value = ''">
+        <button (click)="enviar(msgInput.value); msgInput.value = ''">Enviar</button>
+    </div>
+    } @else {
+    <div class="no-chat">
+        <p>Seleccioná un usuario para empezar a chatear</p>
+    </div>
     }
 </div>
-
-<footer class="chat-footer">
-    <form [formGroup]="formMensaje" (ngSubmit)="mandar()" class="form-envio">
-        <input type="text" formControlName="texto" placeholder="Escribe un mensaje aquí...">
-        <button type="submit" [disabled]="formMensaje.invalid">✈️</button>
-    </form>
-</footer>
-
-} @else {
-<div class="chat-vacio">Selecciona un chat para ver la conversación.</div>
-}
